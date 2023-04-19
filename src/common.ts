@@ -1,7 +1,3 @@
-export function fetchShaderSource(path: string): Promise<string> {
-  return fetch(path).then(res => res.text());
-}
-
 export function getShader(gl: WebGL2RenderingContext, type: number, source: string) {
   const shader = gl.createShader(type);
   gl.shaderSource(shader, source);

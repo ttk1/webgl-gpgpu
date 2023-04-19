@@ -1,8 +1,10 @@
-import { fetchShaderSource, getShader } from './common';
+import { getShader } from '../common';
+import fragmentShaderSource from './frag.glsl';
+import vertexShaderSource from './vert.glsl';
 /**
  * Particle
  */
-export async function demo03() {
+export default async () => {
   const cvs = document.body.appendChild(document.createElement('canvas'));
   cvs.width = 500;
   cvs.height = 500;
@@ -12,8 +14,8 @@ export async function demo03() {
 
   // create shader program
   const program = gl.createProgram();
-  gl.attachShader(program, getShader(gl, gl.VERTEX_SHADER, await fetchShaderSource('./glsl/demo03/vert.glsl')));
-  gl.attachShader(program, getShader(gl, gl.FRAGMENT_SHADER, await fetchShaderSource('./glsl/demo03/frag.glsl')));
+  gl.attachShader(program, getShader(gl, gl.VERTEX_SHADER, vertexShaderSource));
+  gl.attachShader(program, getShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource));
   gl.transformFeedbackVaryings(program, ['vPosition', 'vVelocity'], gl.INTERLEAVED_ATTRIBS);
   gl.linkProgram(program);
   gl.useProgram(program);
@@ -72,4 +74,4 @@ export async function demo03() {
     requestAnimationFrame(step);
   };
   step();
-}
+};

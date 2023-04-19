@@ -1,4 +1,4 @@
-#version 300 es
+export default `#version 300 es
 
 flat out uvec4 result;
 
@@ -107,3 +107,4 @@ void main(void) {
     0u, 0u, 32u, 0u));
   result = uvec4(A, B, C, D);
 }
+`;

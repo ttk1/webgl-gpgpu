@@ -1,4 +1,4 @@
-#version 300 es
+export default `#version 300 es
 
 in vec3 position;
 in vec3 color;
@@ -11,3 +11,4 @@ void main() {
   gl_Position = transform * vec4(position, 1.0);
   vColor = color;
 }
+`;

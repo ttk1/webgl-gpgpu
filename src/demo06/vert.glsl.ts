@@ -1,10 +1,6 @@
-#version 300 es
-
-in uint acc;
+export default `#version 300 es
 
 flat out uint result;
-
-uniform uint step;
 
 uint F(uint X, uint Y, uint Z) {
   return X & Y | ~X  & Z;
@@ -34,10 +30,10 @@ void HH(inout uint a, uint b, uint c, uint d, uint x, int s) {
   a = rotate(a + H(b, c, d) + x + 0x6ed9eba1u, s);
 }
 
-uint A = 0x67452301u;
-uint B = 0xefcdab89u;
-uint C = 0x98badcfeu;
-uint D = 0x10325476u;
+uint A;
+uint B;
+uint C;
+uint D;
 
 void update(uint X[16]) {
   uint AA = A;
@@ -104,11 +100,20 @@ void update(uint X[16]) {
 
 void main(void) {
   // ハッシュ値の先頭が 00000000 の入力を探す
-  uint word = step << 24 | uint(gl_VertexID);
-  update(uint[](
-    word, 0x80u, 0u, 0u,
-    0u, 0u, 0u, 0u,
-    0u, 0u, 0u, 0u,
-    0u, 0u, 32u, 0u));
-  result = (A == 0x00000000u) ? word : acc;
+  for (uint i = 0u; i < 1u << 8; i++) {
+    A = 0x67452301u;
+    B = 0xefcdab89u;
+    C = 0x98badcfeu;
+    D = 0x10325476u;
+    uint word = i << 24 | uint(gl_VertexID);
+    update(uint[](
+      word, 0x80u, 0u, 0u,
+      0u, 0u, 0u, 0u,
+      0u, 0u, 0u, 0u,
+      0u, 0u, 32u, 0u));
+    if (A == 0x00000000u) {
+      result = word;
+    }
+  }
 }
+`;

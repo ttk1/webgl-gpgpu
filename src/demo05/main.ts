@@ -1,8 +1,10 @@
-import { fetchShaderSource, getShader } from './common';
+import { getShader } from '../common';
+import fragmentShaderSource from './frag.glsl';
+import vertexShaderSource from './vert.glsl';
 /**
  * MD4 並列実行
  */
-export async function demo05() {
+export default async () => {
   // 3 バイト分を同時に処理する
   const N = 1 << 24;
   const MAX_STEP = 1 << 8;
@@ -11,8 +13,8 @@ export async function demo05() {
 
   // create shader program
   const program = gl.createProgram();
-  gl.attachShader(program, getShader(gl, gl.VERTEX_SHADER, await fetchShaderSource('./glsl/demo05/vert.glsl')));
-  gl.attachShader(program, getShader(gl, gl.FRAGMENT_SHADER, await fetchShaderSource('./glsl/demo05/frag.glsl')));
+  gl.attachShader(program, getShader(gl, gl.VERTEX_SHADER, vertexShaderSource));
+  gl.attachShader(program, getShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource));
   gl.transformFeedbackVaryings(program, ['result'], gl.SEPARATE_ATTRIBS);
   gl.linkProgram(program);
   gl.useProgram(program);
@@ -66,4 +68,4 @@ export async function demo05() {
   const end = performance.now();
   console.log(`duration: ${Math.round(end - start)} ms`);
   console.log(`hash rate: ${Math.round((N * MAX_STEP * 1000 / (end - start)) / (1024 ** 2))} MH/s`);
-}
+};

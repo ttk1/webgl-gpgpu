@@ -1,8 +1,10 @@
-import { fetchShaderSource, getShader, transferAttribData } from './common';
+import { getShader, transferAttribData } from '../common';
+import fragmentShaderSource from './frag.glsl';
+import vertexShaderSource from './vert.glsl';
 /**
  * 三角
  */
-export async function demo01() {
+export default async () => {
   const cvs = document.body.appendChild(document.createElement('canvas'));
   cvs.width = 500;
   cvs.height = 500;
@@ -12,8 +14,8 @@ export async function demo01() {
 
   // create shader program
   const program = gl.createProgram();
-  gl.attachShader(program, getShader(gl, gl.VERTEX_SHADER, await fetchShaderSource('./glsl/demo01/vert.glsl')));
-  gl.attachShader(program, getShader(gl, gl.FRAGMENT_SHADER, await fetchShaderSource('./glsl/demo01/frag.glsl')));
+  gl.attachShader(program, getShader(gl, gl.VERTEX_SHADER, vertexShaderSource));
+  gl.attachShader(program, getShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource));
   gl.linkProgram(program);
   gl.useProgram(program);
 
@@ -43,4 +45,4 @@ export async function demo01() {
   gl.useProgram(program);
   gl.clear(gl.COLOR_BUFFER_BIT);
   gl.drawArrays(gl.TRIANGLES, 0, 3);
-}
+};

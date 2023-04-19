@@ -1,4 +1,4 @@
-#version 300 es
+export default `#version 300 es
 
 in vec2 position;
 in vec2 velocity;
@@ -17,3 +17,4 @@ void main(void) {
   // 空気抵抗
   vVelocity -= velocity * pow(length(velocity), 2.0) * 0.05;
 }
+`;

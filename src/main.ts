@@ -1,8 +1,9 @@
-import { demo01 } from './demo01';
-import { demo02 } from './demo02';
-import { demo03 } from './demo03';
-import { demo04 } from './demo04';
-import { demo05 } from './demo05';
+import demo01 from './demo01/main';
+import demo02 from './demo02/main';
+import demo03 from './demo03/main';
+import demo04 from './demo04/main';
+import demo05 from './demo05/main';
+import demo06 from './demo06/main';
 
 const pages = {
   'demo01': demo01,
@@ -10,6 +11,7 @@ const pages = {
   'demo03': demo03,
   'demo04': demo04,
   'demo05': demo05,
+  'demo06': demo06,
 };
 
 function index() {
