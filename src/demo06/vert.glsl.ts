@@ -100,12 +100,12 @@ void update(uint X[16]) {
 
 void main(void) {
   // ハッシュ値の先頭が 00000000 の入力を探す
-  for (uint i = 0u; i < 1u << 8; i++) {
+  for (uint i = 0u; i < 1u << 16; i++) {
     A = 0x67452301u;
     B = 0xefcdab89u;
     C = 0x98badcfeu;
     D = 0x10325476u;
-    uint word = i << 24 | uint(gl_VertexID);
+    uint word = i << 16 | uint(gl_VertexID);
     update(uint[](
       word, 0x80u, 0u, 0u,
       0u, 0u, 0u, 0u,

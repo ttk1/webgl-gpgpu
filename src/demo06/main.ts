@@ -5,8 +5,8 @@ import vertexShaderSource from './vert.glsl';
  * MD4 並列実行(for loop 版)
  */
 export default async () => {
-  // 3 バイト分を同時に処理する
-  const N = 1 << 24;
+  // 2 バイト分を同時に処理する
+  const N = 1 << 16;
   const cvs = document.body.appendChild(document.createElement('canvas'));
   const gl = cvs.getContext('webgl2');
 
